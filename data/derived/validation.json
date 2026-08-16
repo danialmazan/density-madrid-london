@@ -1,0 +1,22 @@
+{
+  "madrid_sections": 2450,
+  "london_lsoas": 4994,
+  "london_oas": 26369,
+  "madrid_population": 3422416,
+  "london_population": 9089736,
+  "madrid_area_km2": 604.4653,
+  "london_area_km2": 1594.7189,
+  "distribution_sums": [
+    {
+      "city": "London",
+      "area": 1,
+      "population": 1
+    },
+    {
+      "city": "Madrid",
+      "area": 1,
+      "population": 1
+    }
+  ],
+  "status": "passed"
+}
