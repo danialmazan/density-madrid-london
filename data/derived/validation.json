@@ -18,5 +18,17 @@
       "population": 1
     }
   ],
+  "population_distribution_sums": [
+    {
+      "city": "London",
+      "population": 9089736,
+      "population_share": 1
+    },
+    {
+      "city": "Madrid",
+      "population": 3422416,
+      "population_share": 1
+    }
+  ],
   "status": "passed"
 }

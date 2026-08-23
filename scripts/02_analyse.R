@@ -51,6 +51,33 @@ population_density_deciles <- function(x, city) {
   }))
 }
 
+population_bucket_breaks <- c(seq(0, 75000, by = 5000), Inf)
+population_bucket_labels <- c(
+  paste0(seq(0, 70, by = 5), "–", seq(5, 75, by = 5), "k"),
+  "75k+"
+)
+
+population_density_buckets <- function(x, city) {
+  st_drop_geometry(x) |>
+    mutate(bucket = cut(
+      density,
+      breaks = population_bucket_breaks,
+      labels = population_bucket_labels,
+      right = FALSE
+    )) |>
+    group_by(bucket, .drop = FALSE) |>
+    summarise(population = sum(population), .groups = "drop") |>
+    mutate(
+      bucket_index = as.integer(bucket),
+      city = city,
+      lower = population_bucket_breaks[bucket_index],
+      upper = population_bucket_breaks[bucket_index + 1],
+      label = as.character(bucket),
+      population_share = population / sum(population)
+    ) |>
+    select(city, lower, upper, label, population, population_share)
+}
+
 # Madrid: INE Annual Population Census, 1 January 2024.
 madrid_geom <- st_read(
   file.path(raw_dir, "madrid_sections", "SECC_CE_20240101.shp"),
@@ -192,6 +219,11 @@ population_deciles <- bind_rows(
   population_density_deciles(london, "London")
 )
 
+population_distribution_5k <- bind_rows(
+  population_density_buckets(madrid, "Madrid"),
+  population_density_buckets(london, "London")
+)
+
 madrid_top <- madrid |> slice_max(density, n = 1, with_ties = FALSE)
 london_top <- london |> slice_max(density, n = 1, with_ties = FALSE)
 london_max <- london_top$density[[1]]
@@ -264,6 +296,7 @@ write.csv(summaries, file.path(derived_dir, "city_summary.csv"), row.names = FAL
 write.csv(distributions, file.path(derived_dir, "density_distribution.csv"), row.names = FALSE)
 write.csv(concentrations, file.path(derived_dir, "concentration_curve.csv"), row.names = FALSE)
 write.csv(population_deciles, file.path(derived_dir, "population_density_deciles.csv"), row.names = FALSE)
+write.csv(population_distribution_5k, file.path(derived_dir, "population_density_buckets.csv"), row.names = FALSE)
 
 payload <- list(
   generated = format(Sys.Date(), "%Y-%m-%d"),
@@ -276,6 +309,7 @@ payload <- list(
     ungroup(),
   deciles = decile_points,
   population_deciles = population_deciles,
+  population_distribution_5k = population_distribution_5k,
   extremes = extremes,
   comparison = list(
     london_lsoa_max = london_max,
@@ -304,6 +338,9 @@ validation <- list(
   distribution_sums = distributions |>
     group_by(city) |>
     summarise(area = sum(area_share), population = sum(population_share), .groups = "drop"),
+  population_distribution_sums = population_distribution_5k |>
+    group_by(city) |>
+    summarise(population = sum(population), population_share = sum(population_share), .groups = "drop"),
   status = "passed"
 )
 write_json(validation, file.path(derived_dir, "validation.json"), pretty = TRUE, auto_unbox = TRUE)

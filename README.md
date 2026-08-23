@@ -2,7 +2,7 @@
 
 A visual article comparing the distribution of territorial and resident-weighted population density in Madrid and Greater London.
 
-The article includes English and Spain-Spanish versions, equal-population density deciles, and a shared upper-tail comparison based on London's population-weighted 99th-percentile LSOA density.
+The article includes English and Spain-Spanish versions, equal-population density deciles, a mirrored resident distribution in 5,000 people/km² bands, and a shared upper-tail comparison based on London's population-weighted 99th-percentile LSOA density.
 
 ## Reproduce the analysis
 
