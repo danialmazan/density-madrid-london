@@ -47,6 +47,20 @@
     <section class="methods" id="methods"><div><p class="eyebrow" data-i18n="methodsEyebrow">Method & limits</p><h2 data-i18n="methodsTitle">Comparable, not identical.</h2></div><div class="methods-copy"><p data-i18n-html="method1"><strong>Geographies.</strong> Madrid municipality uses 2,450 census sections; Greater London uses 4,994 LSOAs across its 33 local authorities. LSOAs were selected because their usual population range of 1,000–3,000 is much closer to Spanish census sections than OAs.</p><p data-i18n-html="method2"><strong>Dates.</strong> Madrid population is from the INE Annual Population Census at 1 January 2024. London population is the ONS mid-year estimate at 30 June 2024 on 2021 LSOA boundaries. Both count usual residents, but the systems and reference dates are not identical.</p><p data-i18n-html="method3"><strong>Area.</strong> Density is population divided by full polygon area. No parks, water, roads or industrial zones were removed. A section or LSOA is treated as uniformly dense for distribution calculations.</p><p data-i18n-html="method4"><strong>Interpretation.</strong> This is residential population density—not built-up density, floor-space density, household crowding, building height or daytime population. Results depend on administrative boundaries and small-area design.</p></div></section>
   </main>
   <footer><div class="source-block"><span data-i18n="sources">Sources</span><a href="https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&amp;cid=1254736176992&amp;idp=1254735572981&amp;menu=resultados">INE Annual Population Census</a><a href="https://www.ine.es/prodyser/cartografia/seccionado_2024.zip">INE 2024 census cartography</a><a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimatesnationalstatistics">ONS LSOA population estimates</a><a href="https://data.london.gov.uk/dataset/statistical-gis-boundary-files-for-london-20od9">GLA/ONS London boundaries</a></div><p data-i18n="copyright">Analysis and visualisation derived from official source data. Crown copyright and database right 2024; Contains OS data © Crown copyright and database right 2024.</p></footer>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7e557ad432574707b8ba15bdd75c688e"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics -->
+<script id="cf-analytics-loader">
+(() => {
+  try {
+    if (localStorage.getItem("exclude_cf_analytics") === "1") return;
+  } catch { /* Storage unavailable: retain normal analytics. */ }
+  if (document.querySelector('script[src^="https://static.cloudflareinsights.com/beacon.min.js"]')) return;
+  const beacon = document.createElement("script");
+  beacon.type = "module";
+  beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  beacon.setAttribute("data-cf-beacon", '{"token": "7e557ad432574707b8ba15bdd75c688e"}');
+  document.body.appendChild(beacon);
+})();
+</script>
+<!-- End Cloudflare Web Analytics -->
 </body>
 </html>
